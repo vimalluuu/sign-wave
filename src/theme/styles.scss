@@ -1,0 +1,82 @@
+@forward './material.scss';
+@forward 'fonts/roboto.css';
+
+@forward './ionic';
+@forward './ionic-variables';
+
+:root {
+  --ion-font-family: 'Outfit', sans-serif;
+  --app-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: blur(10px);
+}
+
+.container {
+  width: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-md {
+  box-shadow: none !important;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+body {
+  --mdc-typography-button-letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: 'Outfit', sans-serif;
+
+  background: var(--app-gradient) !important;
+  min-height: 100vh;
+
+  --app-divider-color: rgba(0, 0, 0, 0.1);
+  --app-tinted-background-color: rgba(255, 255, 255, 0.5);
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --app-divider-color: rgba(255, 255, 255, 0.1);
+    --app-tinted-background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &.embed {
+
+    ion-header,
+    ion-tab-bar,
+    #input-mode-group,
+    app-landing-footer,
+    app-send-feedback {
+      display: none !important;
+    }
+  }
+}
+
+.actions-row {
+  position: absolute;
+  margin: 14px;
+  bottom: 0;
+  right: 0;
+  text-align: end;
+  width: calc(100% - 2 * 14px);
+}
+
+ion-header ion-button {
+  text-transform: none;
+  font-weight: 500;
+}
+
+/* Premium Card Style */
+#translation-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15) !important;
+  overflow: hidden;
+}

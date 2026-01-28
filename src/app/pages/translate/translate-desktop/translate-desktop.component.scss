@@ -1,0 +1,70 @@
+@use '../../../../theme/breakpoints' as breakpoints;
+@use '../../../../theme/md3-tokens' as md3;
+@use '../../../../theme/animations' as anim;
+
+.container {
+  @include anim.animate-fade-in(md3.$md3-duration-medium2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  min-height: calc(100vh - 64px);
+
+  @media #{breakpoints.$breakpoint-lt-sm} {
+    padding: 24px 12px;
+  }
+
+  // Input mode button group
+  #input-mode-group {
+    height: auto;
+    margin-bottom: 24px;
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    padding: 8px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    @media #{breakpoints.$breakpoint-lt-sm} {
+      display: none;
+    }
+  }
+
+  // Translation card
+  #translation-card {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    // Custom header for language selectors inside the card
+    app-language-selectors {
+      border-bottom: 1px solid var(--app-divider-color);
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+app-send-feedback {
+  margin-top: 40px;
+}
+
+/* Override ionic toolbar in desktop to be transparent */
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+  }
+}
