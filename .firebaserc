@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "sign-mt"
+    "default": "sign-wave"
   },
   "targets": {
-    "sign-mt": {
+    "sign-wave": {
       "hosting": {
         "translate": [
-          "translate-sign-mt"
+          "sign-wave"
         ]
       }
     }

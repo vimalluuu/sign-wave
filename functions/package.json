@@ -3,6 +3,7 @@
   "scripts": {
     "lint": "eslint src --fix",
     "build": "tsc --project tsconfig.json",
+    "start": "node lib/server.js",
     "build:watch": "tsc -w --project tsconfig.json",
     "test": "jest --run-in-band",
     "test:watch": "jest --watch-all --collect-coverage",

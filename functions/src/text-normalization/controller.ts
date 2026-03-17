@@ -5,7 +5,7 @@ import * as crypto from 'crypto';
 import {errorMiddleware} from '../middlewares/error.middleware';
 import {FirebaseDatabase, Reference} from '@firebase/database-types';
 import {TextNormalizationModel} from './model';
-import {onRequest} from 'firebase-functions/v2/https';
+
 import {defineString, StringParam} from 'firebase-functions/params';
 import {appCheckVerification} from '../middlewares/appcheck.middleware';
 import {optionsRequest} from '../middlewares/options.request';
@@ -102,7 +102,7 @@ export class TextNormalizationEndpoint {
   }
 }
 
-export const textNormalizationFunctions = (database: FirebaseDatabase) => {
+export const textNormalizationApp = (database: FirebaseDatabase) => {
   const openAIKey = defineString('OPENAI_API_KEY');
   const endpoint = new TextNormalizationEndpoint(database, openAIKey);
   const request = endpoint.request.bind(endpoint);
@@ -115,13 +115,5 @@ export const textNormalizationFunctions = (database: FirebaseDatabase) => {
   app.get(['/', '/api/text-normalization'], request);
   app.use(errorMiddleware);
 
-  return onRequest(
-    {
-      invoker: 'public',
-      cpu: 'gcf_gen1',
-      concurrency: 1,
-      timeoutSeconds: 30,
-    },
-    app
-  );
+  return app;
 };

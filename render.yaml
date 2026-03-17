@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: sign-wave-backend
+    env: node
+    plan: free
+    rootDir: functions
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # - key: GOOGLE_APPLICATION_CREDENTIALS
+      #   value: /path/to/service/account/key.json
+      # - key: OPENAI_API_KEY
+      #   value: YOUR_SECRET_HERE
+      # - key: UNKEY_ROOT_KEY
+      #   value: YOUR_SECRET_HERE

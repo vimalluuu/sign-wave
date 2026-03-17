@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as functions from 'firebase-functions';
+
 import * as httpErrors from 'http-errors';
 import * as crypto from 'crypto';
 import {errorMiddleware} from '../middlewares/error.middleware';
@@ -12,7 +12,10 @@ const TRANSLATION_DIRECTIONS = new Set(['spoken-to-signed', 'signed-to-spoken'])
 export class TextToTextTranslationEndpoint {
   models = new Map<string, TextToTextTranslationModel>();
 
-  constructor(private database: FirebaseDatabase, private bucket: Bucket) {}
+  constructor(
+    private database: FirebaseDatabase,
+    private bucket: Bucket
+  ) {}
 
   async modelFiles(direction: string, from: string, to: string): Promise<string[] | null> {
     const query = {prefix: `models/browsermt/${direction}/${from}-${to}`};
@@ -117,11 +120,14 @@ export class TextToTextTranslationEndpoint {
   }
 }
 
-export const textToTextFunctions = (database: FirebaseDatabase, storage: Storage) => {
-  const endpoint = new TextToTextTranslationEndpoint(database, storage.bucket('sign-mt-assets'));
+export const textToTextApp = (database: FirebaseDatabase, storage: Storage) => {
+  const endpoint = new TextToTextTranslationEndpoint(
+    database,
+    storage.bucket(process.env.GOOGLE_CLOUD_PROJECT || 'sign-wave' + '-assets')
+  );
 
   const app = express();
-  app.get('/api/:direction', endpoint.request.bind(endpoint));
+  app.get('/:direction', endpoint.request.bind(endpoint));
   app.use(errorMiddleware);
-  return functions.https.onRequest(app);
+  return app;
 };

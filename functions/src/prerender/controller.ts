@@ -1,6 +1,5 @@
 import * as express from 'express';
 import {errorMiddleware} from '../middlewares/error.middleware';
-import {onRequest} from 'firebase-functions/v2/https';
 
 export function prerenderOpenSearch(req: express.Request, res: express.Response) {
   // TODO support language selection - opensearch.xml?lang=he
@@ -19,9 +18,9 @@ export function prerenderOpenSearch(req: express.Request, res: express.Response)
   res.send(body);
 }
 
-export const prerenderFunctions = () => {
+export const prerenderApp = () => {
   const app = express();
   app.get('/opensearch.xml', prerenderOpenSearch);
   app.use(errorMiddleware);
-  return onRequest({cors: true, invoker: 'public'}, app);
+  return app;
 };
