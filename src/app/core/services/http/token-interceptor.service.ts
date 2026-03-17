@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {from, Observable, switchMap} from 'rxjs';
 import {AppCheck} from '../../helpers/app-check/app-check';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -9,6 +10,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (
       req.url.includes('/api/') ||
       req.url.includes('cloudfunctions.net') ||
+      req.url.includes(environment.apiUrl) ||
       req.url.includes('sign-mt/us-central1')
     ) {
       const appCheckToken$ = from(AppCheck.getToken());

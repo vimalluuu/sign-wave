@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {AssetsService} from '../../core/services/assets/assets.service';
 import {filter, map} from 'rxjs/operators';
 import {ComlinkWorkerInterface, ModelRegistry, TranslationResponse} from '@sign-mt/browsermt';
+import {environment} from '../../../../src/environments/environment';
 
 type TranslationDirection = 'spoken-to-signed' | 'signed-to-spoken';
 
@@ -84,9 +85,9 @@ export class SignWritingTranslationService {
   ): Observable<TranslationResponse> {
     // TODO use the new API (when bergamot model is trained)
     // const query = new URLSearchParams({from, to, text});
-    // return this.http.get<TranslationResponse>(`https://sign.mt/api/${direction}?${query}`);'
+    // return this.http.get<TranslationResponse>(`${environment.apiUrl}/api/${direction}?${query}`);
 
-    const url = 'https://sign.mt/api/spoken-text-to-signwriting';
+    const url = `${environment.apiUrl}/api/spoken-text-to-signwriting`;
     const body = {
       data: {
         texts: sentences.map(s => s.trim()),

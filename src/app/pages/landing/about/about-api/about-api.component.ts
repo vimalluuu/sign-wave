@@ -3,6 +3,7 @@ import {Store} from '@ngxs/store';
 import {IonButton, IonIcon} from '@ionic/angular/standalone';
 import {arrowForward, book} from 'ionicons/icons';
 import {addIcons} from 'ionicons';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-about-api',
@@ -15,7 +16,7 @@ export class AboutApiComponent {
   appearance$ = this.store.select<string>(state => state.settings.appearance);
 
   code = `curl -X POST \\
-  https://sign.mt/api/v1/spoken-text-to-signed-pose \\
+  ${environment.apiUrl}/api/v1/spoken-text-to-signed-pose \\
   -H 'Authorization: Bearer YOUR_API_TOKEN' \\
   -H 'Content-Type: application/json' \\
   -d '{

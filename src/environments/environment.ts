@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'https://sign-wave-backend.onrender.com',
   firebase: {
     apiKey: process.env['FIREBASE_API_KEY'] || '',
     authDomain: 'sign-wave.firebaseapp.com',
