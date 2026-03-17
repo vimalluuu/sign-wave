@@ -7,7 +7,7 @@ import type {InitialNavigation} from '@angular/router';
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyBz3jWNewhOr2vBaKw5Cl-_ECp4q_AfInw',
+    apiKey: process.env['FIREBASE_API_KEY'] || '',
     authDomain: 'sign-wave.firebaseapp.com',
     projectId: 'sign-wave',
     storageBucket: 'sign-wave.firebasestorage.app',
