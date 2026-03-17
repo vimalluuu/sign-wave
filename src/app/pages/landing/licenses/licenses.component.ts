@@ -41,9 +41,11 @@ export class LicensesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpClient.get('/licenses.json').subscribe((licenses: any) => {
-      this.updateTree(licenses);
-    });
+    if ('document' in globalThis) {
+      this.httpClient.get('/licenses.json').subscribe((licenses: any) => {
+        this.updateTree(licenses);
+      });
+    }
   }
 
   updateTree(packages: {[key: string]: any}) {
